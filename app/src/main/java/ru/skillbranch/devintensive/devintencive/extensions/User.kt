@@ -1,8 +1,8 @@
-package ru.skillbranch.devintencive.extensions
+package ru.skillbranch.devintensive.devintencive.extensions
 
-import ru.skillbranch.devintencive.models.User
-import ru.skillbranch.devintencive.models.UserView
-import ru.skillbranch.devintencive.utils.Utils
+import ru.skillbranch.devintensive.devintencive.models.User
+import ru.skillbranch.devintensive.devintencive.models.UserView
+import ru.skillbranch.devintensive.devintencive.utils.Utils
 
 fun User.toUserView() : UserView {
 

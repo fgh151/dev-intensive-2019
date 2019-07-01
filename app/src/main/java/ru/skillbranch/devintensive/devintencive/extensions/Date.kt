@@ -1,4 +1,4 @@
-package ru.skillbranch.devintencive.extensions
+package ru.skillbranch.devintensive.devintencive.extensions
 
 import java.text.SimpleDateFormat
 import java.util.*
@@ -48,16 +48,16 @@ fun Date.format(pattern: String = "HH:mm:ss dd.MM.yy"): String {
     return dateFormat.format(this)
 }
 
-fun Date.add(value: Int, units: TimeUnit = TimeUnit.SECOND): Date {
+fun Date.add(value: Int, units: TimeUnits = TimeUnits.SECOND): Date {
     var time = this.time
 
     println(time)
 
     time += when (units) {
-        TimeUnit.SECOND -> value * SECOND
-        TimeUnit.MINUTE -> value * MINUTE
-        TimeUnit.HOUR -> value * HOUR
-        TimeUnit.DAY -> value * DAY
+        TimeUnits.SECOND -> value * SECOND
+        TimeUnits.MINUTE -> value * MINUTE
+        TimeUnits.HOUR -> value * HOUR
+        TimeUnits.DAY -> value * DAY
     }
 
     println(time)
@@ -66,7 +66,7 @@ fun Date.add(value: Int, units: TimeUnit = TimeUnit.SECOND): Date {
     return this
 }
 
-enum class TimeUnit {
+enum class TimeUnits {
     SECOND,
     MINUTE,
     HOUR,

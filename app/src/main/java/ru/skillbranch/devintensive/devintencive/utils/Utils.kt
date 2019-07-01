@@ -1,4 +1,4 @@
-package ru.skillbranch.devintencive.utils
+package ru.skillbranch.devintensive.devintencive.utils
 
 object Utils {
 
