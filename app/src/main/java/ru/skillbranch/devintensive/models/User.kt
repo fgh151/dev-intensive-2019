@@ -32,62 +32,28 @@ class User(
             val (firstName , lastName) = Utils.parseFullName(fullName)
             return User(id = "${lastId}", firstName = firstName, lastName = lastName)
         }
-
-
-
-        //Builder
-        private var name: String? = null;
-        private var lName: String? = null
-        private var lavatar: String? = null
-        private var lrating: Int = 0
-        private var lrespect: Int = 0
-        private var ldate: Date? = null
-        private var lIsOnline: Boolean = false
-
-        fun firstName(value: String) : Factory {
-            name = value
-            return this
-        }
-
-        fun lastName(value: String) : Factory {
-            lName = value
-            return this
-        }
-
-        fun avatar(value: String) : Factory {
-            this.lavatar = value
-            return this
-        }
-
-        fun rating(rating: Int) : Factory {
-            lrating = rating
-            return this;
-        }
-
-        fun respect(respect: Int) : Factory {
-            lrespect = respect
-            return this;
-        }
-
-        fun lastVisit(date : Date?) : Factory {
-            ldate = date
-            return this
-        }
-
-        fun isOnline(online: Boolean = false) : Factory {
-            lIsOnline = online
-            return this
-        }
-
-        fun build() : User {
-            lastId++;
-            return User(lastId.toString(), name, lName, avatar = lavatar, rating = lrating, respect = lrespect, lastVisit = ldate, isOnline = lIsOnline)
-        }
-
-
     }
 
+    data class Builder(
+        var id : String? = null,
+        var firstName : String? = null,
+        var lastName : String? = null,
+        var avatar : String? = null,
+        var rating : Int = 0,
+        var respect : Int = 0,
+        var lastVisit : Date? = Date(),
+        var isOnline : Boolean = false) {
 
+        fun id(id: String) = apply { this.id = id }
+        fun firstName(firstName: String) = apply { this.firstName = firstName }
+        fun lastName(lastName: String) = apply { this.lastName = lastName }
+        fun avatar(avatar: String) = apply { this.avatar = avatar }
+        fun rating(rating: Int) = apply { this.rating = rating }
+        fun respect(respect: Int) = apply { this.respect = respect }
+        fun lastVisit(lastVisit: Date) = apply { this.lastVisit = lastVisit }
+        fun isOnline(isOnline: Boolean) = apply { this.isOnline = isOnline }
+        fun build() = id?.let { User(it, firstName, lastName, avatar, rating, respect, lastVisit, isOnline) }
+    }
 
 
 }

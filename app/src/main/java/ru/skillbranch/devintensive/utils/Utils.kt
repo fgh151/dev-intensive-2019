@@ -2,11 +2,11 @@ package ru.skillbranch.devintensive.utils
 
 object Utils {
 
-    fun parseFullName(fullName: String?) : Pair<String?, String?> {
-        val parts : List<String>? = fullName?.split(" ");
-        val firstName = parts?.getOrNull(0)
-        val lastName =  parts?.getOrNull(1)
-        return Pair(firstName, lastName);
+    fun parseFullName(fullName:String?) : Pair<String?, String?> {
+        var list = fullName?.split(" ")
+        val firstName = list?.getOrNull(0)
+        val lastName = list?.getOrNull(1)
+        return Pair(if(firstName == "" || firstName == " ") null else firstName, if(lastName == "" || lastName == " ") null else lastName)
     }
 
     fun transliteration(payload: String, divider: String = " "): String {
@@ -86,16 +86,22 @@ object Utils {
         return lat
     }
 
-    fun toInitials(firstName: String?, lastName: String?): String? {
-        if (firstName == null && lastName == null) {
-            return null;
+    fun toInitials(firstName: String?, lastName: String?): String {
+        var char1 = firstName?.getOrNull(0)?.toTitleCase()
+        var char2 = lastName?.getOrNull(0)?.toTitleCase()
+        var string = StringBuilder()
+        string.append(char1)
+        string.append(char2)
+        var initials = string.toString()
+        if (initials.contains("null")) {
+            return if (initials.replace("null", "") == "" || initials.replace("null", "") == " ") {
+                null.toString()
+            }else {
+                initials.replace("null", "")
+            }
+        } else if (initials == "" || initials == " ") {
+            return null.toString()
         }
-        if (lastName == null) {
-            return "${firstName?.first()?.toUpperCase()}"
-        }
-        if (firstName == null) {
-            return "${lastName?.first()?.toUpperCase()}"
-        }
-        return "${firstName?.first()?.toUpperCase()}${lastName?.first()?.toUpperCase()}";
+        return initials
     }
 }
