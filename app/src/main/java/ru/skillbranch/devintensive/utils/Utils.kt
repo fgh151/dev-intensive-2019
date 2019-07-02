@@ -86,22 +86,18 @@ object Utils {
         return lat
     }
 
-    fun toInitials(firstName: String?, lastName: String?): String {
-        var char1 = firstName?.getOrNull(0)?.toTitleCase()
-        var char2 = lastName?.getOrNull(0)?.toTitleCase()
-        var string = StringBuilder()
-        string.append(char1)
-        string.append(char2)
-        var initials = string.toString()
-        if (initials.contains("null")) {
-            return if (initials.replace("null", "") == "" || initials.replace("null", "") == " ") {
-                null.toString()
-            }else {
-                initials.replace("null", "")
+    fun toInitials(firstName: String?, lastName: String?): String? {
+        var initials: String? = ""
+        for (part:String? in arrayOf(firstName, lastName))
+        {
+            initials += when
+            {
+                part == null -> ""
+                part.trim() == "" -> ""
+                else -> part.substring(0, 1).toUpperCase()
             }
-        } else if (initials == "" || initials == " ") {
-            return null.toString()
         }
+        initials = if(initials == "") null else initials
         return initials
     }
 }
